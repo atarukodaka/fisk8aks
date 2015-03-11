@@ -1,0 +1,66 @@
+%ul.nav.nav-tabs
+  %li.active=link_to tag_icon(:list, pat(:list)), url(:competitions, :index)
+  %li=link_to tag_icon(:plus, pat(:new)), url(:competitions, :new)
+
+.tabs-content
+  %table#list.table.table-striped.table-hover.table-condensed
+    %thead
+      %tr
+        %th.header.list-menu
+          .dropdown
+            %a.list-menu-toggle.dropdown-toggle{:href => '#', :'data-toggle' => :dropdown}
+              =tag_icon :magic
+              %span.caret
+            %ul.list-menu.dropdown-menu{:role => :menu}
+              %li.list-menu-wrapper=link_to tag_icon('check-square-o', pat(:select_all)), '#', :id => 'select-all', :class => 'list-menu-link'
+              %li.list-menu-wrapper.list-menu-wrapper-disabled
+                =link_to tag_icon('square-o', pat(:deselect_all)), '#', :id => 'deselect-all', :class => 'list-menu-link list-menu-link-disabled'
+              %li.list-menu-divider.divider
+              %li.list-menu-wrapper.list-menu-wrapper-disabled
+                =link_to tag_icon('trash-o', pat(:delete_selected)), '#', :id => 'delete-selected', :class => 'list-menu-link list-menu-link-disabled'
+                .list-menu-popover-delete-selected.popover.right
+                  .arrow
+                  %h3.popover-title=pat(:delete_selected_title)
+                  .popover-content
+                    = form_tag url(:competitions, :destroy_many), :method => :delete do
+                      =hidden_field_tag :competition_ids, :'data-delete-many-ids' => true
+                      =submit_tag pat(:delete), :class =>'list-menu-popover-delete-selected-btn btn btn-danger btn-small'
+                      .btn.btn-default.btn-small.cancel=pat(:cancel)
+        %th.header= mat(:competition, :id)
+        %th.header= mat(:competition, :cid)
+        %th.header= mat(:competition, :name)
+        %th.header= mat(:competition, :category)
+        %th.header= mat(:competition, :isu_hp)
+        %th.header= mat(:competition, :year)
+        %th.header= mat(:competition, :city)
+        %th.header= mat(:competition, :noc)
+        %th.header= mat(:competition, :start_date)
+        %th.header= mat(:competition, :end_date)
+        %th.header.list-row-action-header
+
+    %tbody
+      -@competitions.each do |competition|
+        %tr.list-row
+          %td.list-column.list-selectable
+            =check_box_tag 'competition_ids[]', :value => competition.id, :class => 'list-selectable-checkbox'
+          %td.list-column=competition.id
+          %td.list-column=competition.cid
+          %td.list-column=competition.name
+          %td.list-column=competition.category
+          %td.list-column=competition.isu_hp
+          %td.list-column=competition.year
+          %td.list-column=competition.city
+          %td.list-column=competition.noc
+          %td.list-column=competition.start_date
+          %td.list-column=competition.end_date
+          %td.list-column.list-row-action
+            .list-row-action-wrapper
+              =link_to tag_icon(:edit), :href => url(:competitions, :edit, :id => competition.id), :rel => :tooltip, :title => "#{pat(:edit)} competition", :class => 'list-row-action-wrapper-link'
+              =link_to tag_icon('trash-o'), :rel => :tooltip, :title => "#{pat(:delete)} competition", :class => 'list-row-action-delete-one list-row-action-wrapper-link'
+              .popover.list-row-action-popover-delete-one.left
+                .arrow
+                %h3.popover-title=pat(:delete, :model => "competition")
+                .popover-content
+                  = form_tag url(:competitions, :destroy, :id => competition.id), :method => :delete do
+                    =submit_tag pat(:delete), :class =>'list-row-action-popover-delete-one-btn btn btn-danger btn-small'
+                    .btn.btn-default.btn-small.cancel=pat(:cancel)

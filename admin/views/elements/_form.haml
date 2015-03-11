@@ -1,0 +1,49 @@
+- error = @element.errors.include?(:number)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :number, :class => 'control-label'
+  .controls
+    =f.text_field :number, :class => 'form-control input-large input-with-feedback', :autofocus => true
+    %span.help-inline=error ? f.error_message_on(:number, :class => 'text-error') : pat(:example)
+- error = @element.errors.include?(:executed_element)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :executed_element, :class => 'control-label'
+  .controls
+    =f.text_field :executed_element, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:executed_element, :class => 'text-error') : pat(:example)
+- error = @element.errors.include?(:bv)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :bv, :class => 'control-label'
+  .controls
+    =f.text_field :bv, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:bv, :class => 'text-error') : pat(:example)
+- error = @element.errors.include?(:goe)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :goe, :class => 'control-label'
+  .controls
+    =f.text_field :goe, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:goe, :class => 'text-error') : pat(:example)
+- error = @element.errors.include?(:judge_scores)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :judge_scores, :class => 'control-label'
+  .controls
+    =f.text_field :judge_scores, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:judge_scores, :class => 'text-error') : pat(:example)
+- error = @element.errors.include?(:score_of_panels)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :score_of_panels, :class => 'control-label'
+  .controls
+    =f.text_field :score_of_panels, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:score_of_panels, :class => 'text-error') : pat(:example)
+- error = @element.errors.include?(:score_id)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :score_id, :class => 'control-label'
+  .controls
+    =f.text_field :score_id, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:score_id, :class => 'text-error') : pat(:example)
+
+.form-actions
+  =f.submit pat(:save), :class => 'btn btn-primary'
+  &nbsp;
+  =f.submit pat(:save_and_continue), :class => 'btn btn-info', :name => 'save_and_continue'
+  &nbsp;
+  =link_to pat(:cancel), url(:elements, :index), :class => 'btn btn-default'

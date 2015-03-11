@@ -1,0 +1,109 @@
+- error = @score.errors.include?(:score_name)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :score_name, :class => 'control-label'
+  .controls
+    =f.text_field :score_name, :class => 'form-control input-large input-with-feedback', :autofocus => true
+    %span.help-inline=error ? f.error_message_on(:score_name, :class => 'text-error') : pat(:example)
+- error = @score.errors.include?(:sid)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :sid, :class => 'control-label'
+  .controls
+    =f.text_field :sid, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:sid, :class => 'text-error') : pat(:example)
+- error = @score.errors.include?(:discipline)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :discipline, :class => 'control-label'
+  .controls
+    =f.text_field :discipline, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:discipline, :class => 'text-error') : pat(:example)
+- error = @score.errors.include?(:segment)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :segment, :class => 'control-label'
+  .controls
+    =f.text_field :segment, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:segment, :class => 'text-error') : pat(:example)
+- error = @score.errors.include?(:date)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :date, :class => 'control-label'
+  .controls
+    =f.text_field :date, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:date, :class => 'text-error') : pat(:example)
+- error = @score.errors.include?(:season)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :season, :class => 'control-label'
+  .controls
+    =f.text_field :season, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:season, :class => 'text-error') : pat(:example)
+- error = @score.errors.include?(:ranking)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :ranking, :class => 'control-label'
+  .controls
+    =f.text_field :ranking, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:ranking, :class => 'text-error') : pat(:example)
+- error = @score.errors.include?(:noc)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :noc, :class => 'control-label'
+  .controls
+    =f.text_field :noc, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:noc, :class => 'text-error') : pat(:example)
+- error = @score.errors.include?(:skating_order)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :skating_order, :class => 'control-label'
+  .controls
+    =f.text_field :skating_order, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:skating_order, :class => 'text-error') : pat(:example)
+- error = @score.errors.include?(:tss)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :tss, :class => 'control-label'
+  .controls
+    =f.text_field :tss, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:tss, :class => 'text-error') : pat(:example)
+- error = @score.errors.include?(:tes)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :tes, :class => 'control-label'
+  .controls
+    =f.text_field :tes, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:tes, :class => 'text-error') : pat(:example)
+- error = @score.errors.include?(:pcs)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :pcs, :class => 'control-label'
+  .controls
+    =f.text_field :pcs, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:pcs, :class => 'text-error') : pat(:example)
+- error = @score.errors.include?(:deductions)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :deductions, :class => 'control-label'
+  .controls
+    =f.text_field :deductions, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:deductions, :class => 'text-error') : pat(:example)
+- error = @score.errors.include?(:total_bv)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :total_bv, :class => 'control-label'
+  .controls
+    =f.text_field :total_bv, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:total_bv, :class => 'text-error') : pat(:example)
+- error = @score.errors.include?(:pdf)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :pdf, :class => 'control-label'
+  .controls
+    =f.text_field :pdf, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:pdf, :class => 'text-error') : pat(:example)
+- error = @score.errors.include?(:skater_id)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :skater_id, :class => 'control-label'
+  .controls
+    =f.text_field :skater_id, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:skater_id, :class => 'text-error') : pat(:example)
+- error = @score.errors.include?(:competition_id)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :competition_id, :class => 'control-label'
+  .controls
+    =f.text_field :competition_id, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:competition_id, :class => 'text-error') : pat(:example)
+
+.form-actions
+  =f.submit pat(:save), :class => 'btn btn-primary'
+  &nbsp;
+  =f.submit pat(:save_and_continue), :class => 'btn btn-info', :name => 'save_and_continue'
+  &nbsp;
+  =link_to pat(:cancel), url(:scores, :index), :class => 'btn btn-default'

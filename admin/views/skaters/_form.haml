@@ -1,0 +1,43 @@
+- error = @skater.errors.include?(:isu_number)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :isu_number, :class => 'control-label'
+  .controls
+    =f.text_field :isu_number, :class => 'form-control input-large input-with-feedback', :autofocus => true
+    %span.help-inline=error ? f.error_message_on(:isu_number, :class => 'text-error') : pat(:example)
+- error = @skater.errors.include?(:name)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :name, :class => 'control-label'
+  .controls
+    =f.text_field :name, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:name, :class => 'text-error') : pat(:example)
+- error = @skater.errors.include?(:noc)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :noc, :class => 'control-label'
+  .controls
+    =f.text_field :noc, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:noc, :class => 'text-error') : pat(:example)
+- error = @skater.errors.include?(:country)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :country, :class => 'control-label'
+  .controls
+    =f.text_field :country, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:country, :class => 'text-error') : pat(:example)
+- error = @skater.errors.include?(:discipline)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :discipline, :class => 'control-label'
+  .controls
+    =f.text_field :discipline, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:discipline, :class => 'text-error') : pat(:example)
+- error = @skater.errors.include?(:bio)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :bio, :class => 'control-label'
+  .controls
+    =f.text_field :bio, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:bio, :class => 'text-error') : pat(:example)
+
+.form-actions
+  =f.submit pat(:save), :class => 'btn btn-primary'
+  &nbsp;
+  =f.submit pat(:save_and_continue), :class => 'btn btn-info', :name => 'save_and_continue'
+  &nbsp;
+  =link_to pat(:cancel), url(:skaters, :index), :class => 'btn btn-default'

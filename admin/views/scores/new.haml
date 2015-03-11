@@ -1,0 +1,7 @@
+%ul.nav.nav-tabs
+  %li=link_to tag_icon(:list, pat(:list)), url(:scores, :index)
+  %li.active=link_to tag_icon(:plus, pat(:new)), url(:scores, :new)
+
+.tabs-content
+  = form_for :score, url(:scores, :create), :class => 'form-horizontal' do |f|
+    =partial 'scores/form', :locals => { :f => f }

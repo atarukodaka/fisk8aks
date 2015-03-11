@@ -1,0 +1,61 @@
+- error = @competition.errors.include?(:cid)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :cid, :class => 'control-label'
+  .controls
+    =f.text_field :cid, :class => 'form-control input-large input-with-feedback', :autofocus => true
+    %span.help-inline=error ? f.error_message_on(:cid, :class => 'text-error') : pat(:example)
+- error = @competition.errors.include?(:name)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :name, :class => 'control-label'
+  .controls
+    =f.text_field :name, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:name, :class => 'text-error') : pat(:example)
+- error = @competition.errors.include?(:category)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :category, :class => 'control-label'
+  .controls
+    =f.text_field :category, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:category, :class => 'text-error') : pat(:example)
+- error = @competition.errors.include?(:isu_hp)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :isu_hp, :class => 'control-label'
+  .controls
+    =f.text_field :isu_hp, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:isu_hp, :class => 'text-error') : pat(:example)
+- error = @competition.errors.include?(:year)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :year, :class => 'control-label'
+  .controls
+    =f.text_field :year, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:year, :class => 'text-error') : pat(:example)
+- error = @competition.errors.include?(:city)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :city, :class => 'control-label'
+  .controls
+    =f.text_field :city, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:city, :class => 'text-error') : pat(:example)
+- error = @competition.errors.include?(:noc)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :noc, :class => 'control-label'
+  .controls
+    =f.text_field :noc, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:noc, :class => 'text-error') : pat(:example)
+- error = @competition.errors.include?(:start_date)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :start_date, :class => 'control-label'
+  .controls
+    =f.text_field :start_date, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:start_date, :class => 'text-error') : pat(:example)
+- error = @competition.errors.include?(:end_date)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :end_date, :class => 'control-label'
+  .controls
+    =f.text_field :end_date, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:end_date, :class => 'text-error') : pat(:example)
+
+.form-actions
+  =f.submit pat(:save), :class => 'btn btn-primary'
+  &nbsp;
+  =f.submit pat(:save_and_continue), :class => 'btn btn-info', :name => 'save_and_continue'
+  &nbsp;
+  =link_to pat(:cancel), url(:competitions, :index), :class => 'btn btn-default'

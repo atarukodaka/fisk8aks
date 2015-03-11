@@ -1,0 +1,37 @@
+- error = @component.errors.include?(:name)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :name, :class => 'control-label'
+  .controls
+    =f.text_field :name, :class => 'form-control input-large input-with-feedback', :autofocus => true
+    %span.help-inline=error ? f.error_message_on(:name, :class => 'text-error') : pat(:example)
+- error = @component.errors.include?(:factor)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :factor, :class => 'control-label'
+  .controls
+    =f.text_field :factor, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:factor, :class => 'text-error') : pat(:example)
+- error = @component.errors.include?(:judge_scores)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :judge_scores, :class => 'control-label'
+  .controls
+    =f.text_field :judge_scores, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:judge_scores, :class => 'text-error') : pat(:example)
+- error = @component.errors.include?(:score_of_panels)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :score_of_panels, :class => 'control-label'
+  .controls
+    =f.text_field :score_of_panels, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:score_of_panels, :class => 'text-error') : pat(:example)
+- error = @component.errors.include?(:score_id)
+%fieldset.control-group{:class => error ? 'has-error' : ''}
+  =f.label :score_id, :class => 'control-label'
+  .controls
+    =f.text_field :score_id, :class => 'form-control input-large input-with-feedback'
+    %span.help-inline=error ? f.error_message_on(:score_id, :class => 'text-error') : pat(:example)
+
+.form-actions
+  =f.submit pat(:save), :class => 'btn btn-primary'
+  &nbsp;
+  =f.submit pat(:save_and_continue), :class => 'btn btn-info', :name => 'save_and_continue'
+  &nbsp;
+  =link_to pat(:cancel), url(:components, :index), :class => 'btn btn-default'

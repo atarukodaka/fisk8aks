@@ -1,0 +1,82 @@
+%ul.nav.nav-tabs
+  %li.active=link_to tag_icon(:list, pat(:list)), url(:scores, :index)
+  %li=link_to tag_icon(:plus, pat(:new)), url(:scores, :new)
+
+.tabs-content
+  %table#list.table.table-striped.table-hover.table-condensed
+    %thead
+      %tr
+        %th.header.list-menu
+          .dropdown
+            %a.list-menu-toggle.dropdown-toggle{:href => '#', :'data-toggle' => :dropdown}
+              =tag_icon :magic
+              %span.caret
+            %ul.list-menu.dropdown-menu{:role => :menu}
+              %li.list-menu-wrapper=link_to tag_icon('check-square-o', pat(:select_all)), '#', :id => 'select-all', :class => 'list-menu-link'
+              %li.list-menu-wrapper.list-menu-wrapper-disabled
+                =link_to tag_icon('square-o', pat(:deselect_all)), '#', :id => 'deselect-all', :class => 'list-menu-link list-menu-link-disabled'
+              %li.list-menu-divider.divider
+              %li.list-menu-wrapper.list-menu-wrapper-disabled
+                =link_to tag_icon('trash-o', pat(:delete_selected)), '#', :id => 'delete-selected', :class => 'list-menu-link list-menu-link-disabled'
+                .list-menu-popover-delete-selected.popover.right
+                  .arrow
+                  %h3.popover-title=pat(:delete_selected_title)
+                  .popover-content
+                    = form_tag url(:scores, :destroy_many), :method => :delete do
+                      =hidden_field_tag :score_ids, :'data-delete-many-ids' => true
+                      =submit_tag pat(:delete), :class =>'list-menu-popover-delete-selected-btn btn btn-danger btn-small'
+                      .btn.btn-default.btn-small.cancel=pat(:cancel)
+        %th.header= mat(:score, :id)
+        %th.header= mat(:score, :score_name)
+        %th.header= mat(:score, :sid)
+        %th.header= mat(:score, :discipline)
+        %th.header= mat(:score, :segment)
+        %th.header= mat(:score, :date)
+        %th.header= mat(:score, :season)
+        %th.header= mat(:score, :ranking)
+        %th.header= mat(:score, :noc)
+        %th.header= mat(:score, :skating_order)
+        %th.header= mat(:score, :tss)
+        %th.header= mat(:score, :tes)
+        %th.header= mat(:score, :pcs)
+        %th.header= mat(:score, :deductions)
+        %th.header= mat(:score, :total_bv)
+        %th.header= mat(:score, :pdf)
+        %th.header= mat(:score, :skater_id)
+        %th.header= mat(:score, :competition_id)
+        %th.header.list-row-action-header
+
+    %tbody
+      -@scores.each do |score|
+        %tr.list-row
+          %td.list-column.list-selectable
+            =check_box_tag 'score_ids[]', :value => score.id, :class => 'list-selectable-checkbox'
+          %td.list-column=score.id
+          %td.list-column=score.score_name
+          %td.list-column=score.sid
+          %td.list-column=score.discipline
+          %td.list-column=score.segment
+          %td.list-column=score.date
+          %td.list-column=score.season
+          %td.list-column=score.ranking
+          %td.list-column=score.noc
+          %td.list-column=score.skating_order
+          %td.list-column=score.tss
+          %td.list-column=score.tes
+          %td.list-column=score.pcs
+          %td.list-column=score.deductions
+          %td.list-column=score.total_bv
+          %td.list-column=score.pdf
+          %td.list-column=score.skater_id
+          %td.list-column=score.competition_id
+          %td.list-column.list-row-action
+            .list-row-action-wrapper
+              =link_to tag_icon(:edit), :href => url(:scores, :edit, :id => score.id), :rel => :tooltip, :title => "#{pat(:edit)} score", :class => 'list-row-action-wrapper-link'
+              =link_to tag_icon('trash-o'), :rel => :tooltip, :title => "#{pat(:delete)} score", :class => 'list-row-action-delete-one list-row-action-wrapper-link'
+              .popover.list-row-action-popover-delete-one.left
+                .arrow
+                %h3.popover-title=pat(:delete, :model => "score")
+                .popover-content
+                  = form_tag url(:scores, :destroy, :id => score.id), :method => :delete do
+                    =submit_tag pat(:delete), :class =>'list-row-action-popover-delete-one-btn btn btn-danger btn-small'
+                    .btn.btn-default.btn-small.cancel=pat(:cancel)

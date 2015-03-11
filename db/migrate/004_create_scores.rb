@@ -6,7 +6,6 @@ class CreateScores < ActiveRecord::Migration
       t.string :discipline
       t.string :segment
       t.date :date
-      t.string :season
 
       t.integer :ranking
 
@@ -25,6 +24,8 @@ class CreateScores < ActiveRecord::Migration
 
       t.belongs_to :skater, index: true
       t.belongs_to :competition, index: true
+
+      t.timestamps
     end
   end
 end

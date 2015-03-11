@@ -105,21 +105,21 @@ module Fisk8aks
       
       ## tr/dl/dd
       ##     sid, competition, category, segment, skater
-      ar = [:score_name, :competition, :discipline, :segment, :skater]
+      ar = [:score_name, :competition_name, :discipline, :segment, :skater_name]
       hash = {:sid => sid}
       i = 0
       ar.each do |key|
         elem = doc.xpath("//dl/dd")[i]
         e = elem.xpath("a"); 
         str = (e.empty?) ? elem.inner_html : e.inner_html
-        hash[key] = str.cutspaces
+        hash[key] = str.chompsp
         i = i+1
       end
-      # skater_id
+      # sid
       bio = doc.xpath("//dl/dd[5]/a").attribute("href").value
       # http://figure2.me/slfs/players/view/12461
       bio =~ /^.*\/([\d]+)$/
-      hash[:skater_id] = $1
+      hash[:skater_isu_number] = $1
       
       ## tr/dl/table/tr/td/dt
       ##     date, skating_order, ranking, tss, tes ,pcs, deductions
@@ -128,20 +128,12 @@ module Fisk8aks
       # binding.pry
       ar.each_with_index do |key, i|
         elem = doc.xpath("//dl/table/tr/td/dd")[i]
-        hash[key] = elem.text.cutspaces
+        hash[key] = elem.text.chompsp
       end
-      ## season
-      date = Date.parse(hash[:date])
-      season_year =  (date.month < 7) ? date.year - 1 : date.year
-      hash[:season] = sprintf("%4d-%02d", season_year, (season_year+1)%100)
-      
-      ## noc
-      if skater = @skaters.find_id(hash[:skater_id].to_s)
-        hash[:noc] = skater["noc"]
-      end
+
       ## tr/dl/dd
       ##     total_bv, pdf
-      hash[:total_bv] = doc.xpath("//dl/table/tr/td[2]/dd")[0].inner_html.cutspaces
+      hash[:total_bv] = doc.xpath("//dl/table/tr/td[2]/dd")[0].inner_html.chompsp
       hash[:pdf] = doc.xpath("//dl/table/tr/td[2]/dd")[1].xpath("a").attribute('href').value
       
       ## div(@class="related")/tr/td
@@ -153,14 +145,14 @@ module Fisk8aks
         next if num.nil?
         # ar = [:element, :bv, :goe, :judge_scores, :score]
         h = {}
-        h[:element] = elem.xpath("td")[1].inner_html.cutspaces.sub(/^([^\s]+) *(.*)$/, '\\1')
+        h[:executed_element] = elem.xpath("td")[1].inner_html.chompsp.sub(/^([^\s]+) *(.*)$/, '\\1')
         h[:info] = $2 if $2
-        h[:bv] = elem.xpath("td")[2].inner_html.cutspaces.sub(/^([\d\.]+) *(.*)$/, '\\1')
+        h[:bv] = elem.xpath("td")[2].inner_html.chompsp.sub(/^([\d\.]+) *(.*)$/, '\\1')
         h[:credit] = $2 if $2
 
-        h[:goe] = elem.xpath("td")[3].inner_html.cutspaces
-        h[:judge_scores] = elem.xpath("td")[4].inner_html.cutspaces.split(/ +/)
-        h[:score] = elem.xpath("td")[5].inner_html.cutspaces
+        h[:goe] = elem.xpath("td")[3].inner_html.chompsp
+        h[:judge_scores] = elem.xpath("td")[4].inner_html.chompsp.split(/ +/)
+        h[:score_of_panels] = elem.xpath("td")[5].inner_html.chompsp
         hash[:elements] << h
       end
 
@@ -173,7 +165,7 @@ module Fisk8aks
         
         hash[:components][key] = {}
         hash[:components][key][:judge_scores] = elem.xpath("td")[1].inner_html.split(" ")
-        hash[:components][key][:score] = elem.xpath("td")[2].inner_html
+        hash[:components][key][:score_of_panels] = elem.xpath("td")[2].inner_html
       end
       
       $stderr.puts "   parsed: #{hash[:skater]} at #{hash[:competition]}/#{hash[:discipline]}/#{hash[:segment]}"

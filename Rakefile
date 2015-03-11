@@ -14,15 +14,15 @@ require 'pry-byebug'
 require 'fisk8aks/parser'
 require 'fisk8aks/updater'
 
-require './models/skater'
-require './models/competition'
-
 PadrinoTasks.use(:database)
 PadrinoTasks.use(:activerecord)
 PadrinoTasks.init
 
 db_filename = "db/fisk8aks_development.db"
 ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: db_filename)
+
+parser = Fisk8aks::Parser.new
+updater = Fisk8aks::Updater.new
 
 ################
 task :pry do
@@ -32,8 +32,6 @@ end
 
 ################
 namespace :skaters do
-  parser = Fisk8aks::Parser.new
-
   task :parse do
     binding.pry
     p skaters = parser.parse_skaters
@@ -41,7 +39,6 @@ namespace :skaters do
 
   task :update do
     skaters = parser.parse_skaters
-    updater = Fisk8aks::Updater.new
 
     $stderr.puts "updating database"
     skaters.each do |hash|
@@ -56,7 +53,7 @@ namespace :competitions do
   parser = Fisk8aks::Parser.new
 
   task :parse do
-    binding.pry
+    #binding.pry
     p competitions = parser.parse_competitions(1)
   end
 
@@ -73,21 +70,30 @@ namespace :competitions do
 end
 ################
 namespace :score do
-  parser = Fisk8aks::Parser.new
-
   task :parse do
-    binding.pry
-    p scores = parser.parse_score(sid)
+    sid = 16125
+    p score = parser.parse_score(sid)
   end
 
   task :update do
-    scores = parser.parse_score
-    
-    $stderr.puts "updating database..."
-    updater = Fisk8aks::Updater.new
-    competitions.each do |hash|
-      updater.update_score(hash)
+    #binding.pry
+    sid = ENV['SID'] || 16125
+    fname = "#{sid}_score.json"
+
+    if !File.exists? fname
+      score = parser.parse_score(sid)
+      File.open(fname, "w"){|f| f.write(score.to_json)}
     end
-    $stderr.puts "done."
+    score = JSON.load(File.open(fname))
+    
+    updater.update_score(score)
+  end
+end
+
+################
+namespace :scores do
+  task :update do
+    competition = Competition.first
+    
   end
 end
